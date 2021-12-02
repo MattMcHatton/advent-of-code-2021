@@ -20,7 +20,7 @@ function day1() {
         //starting at index 1 and comparing backwards
         var increase = 0
 /*      for(let i = 1; i < arr.length; i++){
-            if(arr[i]>arr[i-1]){
+            if(Number(arr[i]) > Number(arr[i-1])){
                 increase++
             }
         } */

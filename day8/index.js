@@ -85,6 +85,20 @@ function day8_part2() {
 function mapSignal(signal){
     let arr = signal.split(' ').filter(output => output.trim() != '')
     let map = {}
+    
+    let unique = [];
+    let len5 = [];
+    let len6 =[];
+
+    arr.forEach(x=>{
+        if(x.length == 2 || x.length == 3 || x.length == 4 || x.length == 7){
+            unique.push(x)
+        } else if (x.length == 5) {
+            len5.push(x)
+        } else {
+            len6.push(x)
+        }
+    })
 
 /*  
     0: [1,1,1,1,1,1,0],
@@ -107,7 +121,7 @@ function mapSignal(signal){
     //length 7 = 8
     
     //all unique first
-    arr.forEach(x=>{
+    unique.forEach(x=>{
         if(x.length == 2){
             map[1] = sortString(x);
         } else if(x.length == 3){
@@ -120,7 +134,7 @@ function mapSignal(signal){
     })
 
     //all of length 6
-    arr.forEach(x=>{
+    len6.forEach(x=>{
         
         if (x.length == 6) {
             //either 0, 6, or 9
@@ -140,7 +154,7 @@ function mapSignal(signal){
     })
 
     //all of length 5
-    arr.forEach(x=>{
+    len5.forEach(x=>{
         
         //will give a char thats in 2 but not 3 or 5
         let diff_2 = compareString(map[9], map[8])
@@ -177,6 +191,7 @@ function decode(input, map){
 
 }
 
+//due to the way the object is coded, need to find key based on value
 function getKeyByValue(object, value) {
     return Object.keys(object).find(key => object[key] === value);
 }
@@ -203,6 +218,7 @@ function compareString(s1, s2) {
     return match
 }
 
+//can sort to compare because only no duplicate chars in strings
 function sortString(string){
     let arr = string.split('');
     let sorted = arr.sort();

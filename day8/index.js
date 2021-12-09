@@ -63,6 +63,8 @@ function day8_part2() {
         lines.forEach(x=>{
             [signal, output] = x.split('|')
             signalArr.push([signal, output])
+            // signalArr = x.split('|')
+            //console.log(signalArr)
         })
 
         let count = 0;
@@ -136,41 +138,35 @@ function mapSignal(signal){
     //all of length 6
     len6.forEach(x=>{
         
-        if (x.length == 6) {
-            //either 0, 6, or 9
-            let diff = compareString(x, map[8])
-            //included in 4 but not 1 or 7 is 0
-            //included in all is 6
-            //included in none is 9
+        //either 0, 6, or 9
+        let diff = compareString(x, map[8])
+        //included in 4 but not 1 or 7 is 0
+        //included in all is 6
+        //included in none is 9
 
-            if(map[4].includes(diff) && !map[1].includes(diff) && !map[7].includes(diff)){
-                map[0] = sortString(x)
-            } else if (map[4].includes(diff) && map[1].includes(diff) && map[7].includes(diff)){
-                map[6] = sortString(x)
-            } else {
-                map[9] = sortString(x)
-            }
+        if(map[4].includes(diff) && !map[1].includes(diff) && !map[7].includes(diff)){
+            map[0] = sortString(x)
+        } else if (map[4].includes(diff) && map[1].includes(diff) && map[7].includes(diff)){
+            map[6] = sortString(x)
+        } else {
+            map[9] = sortString(x)
         }
     })
 
     //all of length 5
-    len5.forEach(x=>{
+    len5.forEach(x => {
         
         //will give a char thats in 2 but not 3 or 5
         let diff_2 = compareString(map[9], map[8])
         //will give a char thats not in 5 but in 2 and 3
         let diff_5 = compareString(map[6], map[8])
 
-        if(x.length == 5){
-            
-            if(x.includes(diff_2)){
-                map[2] = sortString(x)
-            } else if (!x.includes(diff_5)){
-                map[5] = sortString(x)
-            } else {
-                map[3] = sortString(x)
-            }
-
+        if(x.includes(diff_2)){
+            map[2] = sortString(x)
+        } else if (!x.includes(diff_5)){
+            map[5] = sortString(x)
+        } else {
+            map[3] = sortString(x)
         }
     })
 
@@ -197,7 +193,7 @@ function getKeyByValue(object, value) {
 }
 
 function compareString(s1, s2) {
-    let match = ''
+    let diff = ''
     let longestString = ''
     let compString = ''
 
@@ -211,20 +207,20 @@ function compareString(s1, s2) {
 
     for(let i = 0; i < longestString.length; i++){
         if(!compString.includes(longestString[i])){
-            match+=longestString[i];
+            diff+=longestString[i];
         }
     }
 
-    return match
+    return diff
 }
 
 //can sort to compare because only no duplicate chars in strings
 function sortString(string){
-    let arr = string.split('');
+/*     let arr = string.split('');
     let sorted = arr.sort();
-    let sortedString = sorted.join('');
+    let sortedString = sorted.join(''); */
 
-    return sortedString
+    return [...string].sort().join('')
 }
 
 console.log(day8_part2());
